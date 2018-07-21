@@ -6,8 +6,12 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-
+var bodyParser = require('body-parser');
 var app = express();
+
+const mongoose = require("mongoose");
+const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/merryMeet";
+const db = require("./models");
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -43,7 +47,7 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-var port = process.env.PORT || '3000';
+var port = process.env.PORT || '3001';
 app.listen(port, () => {
   console.log("Server listening on port " + port);
 });
