@@ -18,8 +18,10 @@ class App extends Component {
     this.state = {
       isAuthenticated: false,
       newUser: false,
+      loggedInUser: null
     };
 
+    this.onLoggedIn = this.onLoggedIn.bind(this);
     this.signUpClick = this.signUpClick.bind(this);
   }
 
@@ -28,18 +30,27 @@ class App extends Component {
       newUser: true
     })
   };
+
+  onLoggedIn(user){
+    this.setState({
+      loggedInUser: user
+    })
+
+  }
  
   render() {
     return (
       <Wrapper>
         {
-          this.state.isAuthenticated ? (
+          !!this.state.loggedInUser ? (
             <MapContainer />
           ) :
           this.state.newUser ? (
             <Signup />
           ) : (
-            <Login />
+            <Login
+              onLoggedIn={this.onLoggedIn}
+            />
           )
         }
       </Wrapper>

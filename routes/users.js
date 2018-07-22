@@ -17,10 +17,9 @@ router.get('/login', function(req, res, next) {
       if (err) {
         res.json({message:"Error signing in"})
       } else { 
-         console.log("passwords match");
-        res.json({message: "Check password and Username", isAuthenticated: true, success: isMatch, user}
-      );
-    }
+        console.log("passwords match", user);
+        res.status(201).json(user);
+      }
     }));
   });
 });

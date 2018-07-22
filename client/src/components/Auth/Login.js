@@ -21,12 +21,14 @@ export default class Login extends Component{
     };
 
     onSubmit(event){
+        console.log('WHAT IS OUR PROPS', this.props);
         event.preventDefault();
         axios.get('http://localhost:3001/users/login', {
             params: this.state
         })
-        .then(res => {
-            console.log("login request sent", res.body);
+        .then(response => {
+            console.log("login request sent", response);
+            this.props.onLoggedIn(response.data);
         });
     };
 
