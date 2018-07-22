@@ -4,25 +4,24 @@ const db = require('../models');
 
 
 /* GET users listing. */
-router.post('/signin', function(req, res, next) {
-  console.log("sign in hit");
-  db.User.findOne({username: req.body.username}, function(err, user){
+router.get('/login', function(req, res, next) {
+  db.User.findOne({username: req.query.username}, function(err, user){
     console.log("User", user);
-    if (err) {
-      res.json({message: "There was an error logging you in"});
+    if (err || !user) {
+      res
+      .status(401)
+      .json({message: "There was an error logging you in"});
+      return;
     }
-    if (!user.comparePassword(req.body.password, function(err, isMatch){
+    if (!user.comparePassword(req.query.password, function(err, isMatch){
       if (err) {
         res.json({message:"Error signing in"})
-      }
-       else{ 
+      } else { 
          console.log("passwords match");
-        res.json({message: "Check password and Username", success: isMatch, user});
-    }  
+        res.json({message: "Check password and Username", isAuthenticated: true, success: isMatch, user}
+      );
+    }
     }));
-
-
-    
   });
 });
 
