@@ -4,7 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
-var indexRouter = require('./routes/index');
+var indexRouter = require('./routes');
 var usersRouter = require('./routes/users');
 var bodyParser = require('body-parser');
 var app = express();
@@ -46,6 +46,14 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+//connect to Mongo DB
+mongoose.Promise = Promise; 
+mongoose.connect(MONGODB_URI, function(err){
+  if (err) throw err;
+  console.log("connected to MongoDB");
+});
+
 
 var port = process.env.PORT || '3001';
 app.listen(port, () => {
