@@ -15,11 +15,12 @@ router.get('/login', function(req, res, next) {
     }
     if (!user.comparePassword(req.query.password, function(err, isMatch){
       if (err) {
-        res.json({message:"Error signing in"})
-      } else { 
+        res.json({message:"Error signing in", err})
+      } else {  
         console.log("passwords match", user);
-        res.status(201).json(user);
+        res.status(201).send({success: isMatch, user});
       }
+      
     }));
   });
 });

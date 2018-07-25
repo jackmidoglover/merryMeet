@@ -16,7 +16,6 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      isAuthenticated: false,
       newUser: false,
       loggedInUser: null
     };
@@ -32,9 +31,9 @@ class App extends Component {
     });
   };
 
-  onLoggedIn(user){
+  onLoggedIn(user, isMatch){
     this.setState({
-      loggedInUser: user
+      loggedInUser: user,
     });
   };
 

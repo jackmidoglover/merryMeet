@@ -24,7 +24,7 @@ export default class Login extends Component{
 
     onSubmit(event){
         event.preventDefault();
-        axios.post('http://localhost:3001/users/signup', {
+        axios.post('/api/users/signup', {
             params:this.state
         })
         .then(response => {
