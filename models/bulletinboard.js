@@ -19,6 +19,9 @@ const bulletinSchema = new Schema({
         type: String, 
         required: true
     }, 
+    religion: {
+        type: String
+    }
 })
 
 let Bulletin = mongoose.model("Bulletins", bulletinSchema);

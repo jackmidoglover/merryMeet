@@ -14,6 +14,7 @@ export default class Login extends Component{
         this.onSubmit = this.onSubmit.bind(this);
         this.onUsernameChange = this.onUsernameChange.bind(this);
         this.onPasswordChange = this.onPasswordChange.bind(this);
+        this.onNewUserClick = this.onNewUserClick.bind(this);
 
     };
 
@@ -21,7 +22,6 @@ export default class Login extends Component{
     };
 
     onSubmit(event){
-        console.log('WHAT IS OUR PROPS', this.props);
         event.preventDefault();
         axios.get('http://localhost:3001/users/login', {
             params: this.state
@@ -44,6 +44,10 @@ export default class Login extends Component{
         });
     };
 
+    onNewUserClick(){
+        this.props.signUpClick();
+    }
+
     render(){
         return(
             <Authcard title="Log In">
@@ -63,7 +67,7 @@ export default class Login extends Component{
                     </div>
                     <div className="row">
                         <div className="col-md-12 text-center">
-                            <button className="btn btn-secondary">New User? </button> 
+                            <button className="btn btn-secondary" onClick={this.onNewUserClick}>New User? </button> 
                         </div>
                     </div>
                 </form>

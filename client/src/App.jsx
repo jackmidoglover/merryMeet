@@ -23,20 +23,26 @@ class App extends Component {
 
     this.onLoggedIn = this.onLoggedIn.bind(this);
     this.signUpClick = this.signUpClick.bind(this);
+    this.onSignUp = this.onSignUp.bind(this);
   }
 
   signUpClick(){
     this.setState({
       newUser: true
-    })
+    });
   };
 
   onLoggedIn(user){
     this.setState({
       loggedInUser: user
-    })
+    });
+  };
 
-  }
+  onSignUp(user){
+    this.setState({
+      loggedInUser: user
+    });
+  };
  
   render() {
     return (
@@ -46,10 +52,13 @@ class App extends Component {
             <MapContainer />
           ) :
           this.state.newUser ? (
-            <Signup />
+            <Signup
+            onSignUp={this.onSignUp}
+            />
           ) : (
             <Login
               onLoggedIn={this.onLoggedIn}
+              signUpClick={this.signUpClick}
             />
           )
         }
@@ -58,8 +67,8 @@ class App extends Component {
   }
 };
 
-// Create authentication flow 
-  // How to use router-dom to route and make an api request w/same button?
-  // Does the authentication and async storage go in App.js where login/sign up components will be loaded or in those components
+// cookie for log in
+// check for cookie when logged in -set week expiry time on cookie
+// with error messages 
 
 export default App;

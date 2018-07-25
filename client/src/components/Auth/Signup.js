@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Authcard from './Authcard';
+import axios from 'axios';
 
 
 export default class Login extends Component{
@@ -7,10 +8,62 @@ export default class Login extends Component{
         super(props);
         this.state = {
             username: '',
-            password: '', 
-            isAuthenticated: false
-        }
+            password: '',
+            religion:'',
+            zipcode:'',
+            bio: '', 
+        };
+
+        this.onSubmit = this.onSubmit.bind(this);
+        this.onUsernameChange = this.onUsernameChange.bind(this);
+        this.onPasswordChange = this.onPasswordChange.bind(this);
+        this.onReligionChange = this.onReligionChange.bind(this);
+        this.onZipcodeChange = this.onZipcodeChange.bind(this);
+        this.onBioChange = this.onBioChange.bind(this);
     };
+
+    onSubmit(event){
+        event.preventDefault();
+        axios.post('http://localhost:3001/users/signup', {
+            params:this.state
+        })
+        .then(response => {
+            console.log("sign up request sent", response);
+            this.props.onSignUp(response.data);
+        });
+    };
+
+    onUsernameChange(event){
+        this.setState({
+            username: event.target.value
+        });
+    };
+
+    onPasswordChange(event){
+        this.setState({
+            password: event.target.value
+        });
+    };
+
+    onReligionChange(event){
+        this.setState({
+            religion: event.target.value
+        });
+    };
+
+    onZipcodeChange(event){
+        this.setState({
+            zipcode: event.target.value
+        });
+    };
+
+    onBioChange(event){
+        this.setState({
+            bio: event.target.value
+        });
+    };
+
+    
 
     componentDidMount(){
     };
@@ -18,30 +71,28 @@ export default class Login extends Component{
     render(){
         return(
             <Authcard title="Sign Up">
-                <div className="col-md-10 offset-md-1 login-input">
+                <form className="col-md-10 offset-md-1 login-input" onSubmit={this.onSubmit}>
                     <div className="row">
-                        <input type="text" name="username" placeholder="username" className="form-control" />
+                        <input type="text" name="username" placeholder="username" className="form-control" onChange={this.onUsernameChange} />
                     </div>
                     <div className="row">
+                        <input type="text" name="password" placeholder="password" className="form-control" onChange={this.onPasswordChange} />
                     </div>
                     <div className="row">
-                        <input type="text" name="password" placeholder="password" className="form-control" />
+                        <input type="text" name="religion" placeholder="religion" className="form-control" onChange={this.onReligionChange} />
                     </div>
                     <div className="row">
-                        <input type="text" name="religion" placeholder="religion" className="form-control" />
+                        <input type="number" name="zipcode" placeholder="Zipcode" className="form-control" onChange={this.onZipcodeChange} />
                     </div>
                     <div className="row">
-                        <input type="number" name="zipcode" placeholder="Zipcode" className="form-control" />
-                    </div>
-                    <div className="row">
-                        <textarea name="bio" placeholder="Short Biography" className="form-control" />
+                        <textarea name="bio" placeholder="Short Biography" className="form-control" onChange={this.onBioChange} />
                     </div>
                     <div className="row">
                         <div className="col-md-12 text-center">
-                            <button for="signup" className="btn btn-secondary">Sign Up </button> 
+                            <input type="submit" className="btn btn-primary" value="Sign Up!" /> 
                         </div>
                     </div>
-                </div>
+                </form>
             </ Authcard>
             
         )
