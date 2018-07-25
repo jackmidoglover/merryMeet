@@ -4,14 +4,15 @@ const db = require('../models');
 
 /* GET home page. */
 
-router.post("/addmarker", (req, res, next) => {
+router.post("/addMarker", (req, res, next) => {
   let markerObject = req.body.params;
-  console.log("route hit");
+  console.log("route hit", markerObject);
   db.Bulletin.create({
     latitude: markerObject.currentLocation.lat,
     longitude: markerObject.currentLocation.lng,
-    image: markerObject.newMarker.imgUrl,
+    image: markerObject.newMarker.image,
   }, function (err, marker) {
+    console.log(marker);
     if (err) console.log(err);
     res.json(marker);
   });

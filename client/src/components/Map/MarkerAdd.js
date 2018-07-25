@@ -2,27 +2,13 @@ import React from 'react';
 import axios from 'axios';
 
 export class MarkerMaker extends React.Component{
-    constructor(props){
-        super(props);
-    
-        this.state = {
-            imgUrl: '',
-            religion: ''
-        };
-        this.onMarkerClick = this.onMarkerClick.bind(this);
-        this.onAddMarker = this.onAddMarker.bind(this);
-    };
 
     onMarkerClick = (event) => {
         console.log("marker clicked");
         this.props.onMarkerClicked({
-            imgUrl: event.target.src,
+            image: event.target.src,
             religion: event.target.className,
         });
-    };
-
-    onAddMarker(event){
-        this.props.onMarkerAdd(this.state);
     };
 
     render(){
@@ -36,7 +22,7 @@ export class MarkerMaker extends React.Component{
 
                 <div className="row">
                     <div className="col-md-4 offset-md-4 text-center">
-                    <button className="btn btn-primary" onClick={this.onAddMarker}> Add Marker </button>
+                    <button className="btn btn-primary" onClick={this.props.onMarkerAdd}> Add Marker </button>
                     </div>
                 </div>
             </div>

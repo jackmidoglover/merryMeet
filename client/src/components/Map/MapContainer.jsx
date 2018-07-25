@@ -17,23 +17,22 @@ export class MapContainer extends React.Component {
             lng: ''
         },
         newMarker: {
-            imgUrl: '',
+            image: '',
             religion: ''
         },
         markers: [],
         markerAdded: false
     };
 
+    // saves image data for clicked marker to state for later api request
     onMarkerClicked = (marker) => {
         console.log("Changing parent state", marker);
         this.setState({
             newMarker: { ...marker }
         })
     }
-
-    onMarkerAdd = (marker) => {
-
-        console.log("add marker click");
+    // api request sends marker added data to database for later location population
+    onMarkerAdd = () => {
         axios.post('/api/addMarker', {
             params: this.state
         })
@@ -47,9 +46,17 @@ export class MapContainer extends React.Component {
             })
             .catch(error => {
                 console.log(error.response);
-            })
-    }
+            });
+    };
 
+    // when a marker on the map is clicked, it pulls up the comment window
+    onBulletinClick(props, marker, e){
+        console.log(marker);
+        console.log(props);
+        console.log(e);
+    };
+
+    // centers google map, then makes api call for markers to populate map
     componentDidMount() {
         // center the map on user's current location
         console.log("map center");
@@ -66,9 +73,11 @@ export class MapContainer extends React.Component {
             });
         };
 
+        // populate map with markers saved in database
         axios.get('/api/loadMarkers')
             .then(response => {
                 let locationMarkers = response.data;
+                console.log(locationMarkers);
                 let updatedMarkersArray = [...this.state.markers];
                 locationMarkers.forEach(location => {
                     updatedMarkersArray.push(location);
@@ -78,9 +87,7 @@ export class MapContainer extends React.Component {
                 this.setState({
                     markers: updatedMarkersArray,
                 });
-                // console.log("marker get request sent", this.state.markers[0].image);
             });
-
     };
 
 
@@ -104,14 +111,16 @@ export class MapContainer extends React.Component {
                     >
                         {this.state.markers.map(marker => (
                             <Marker
-                                key={marker._id}
-                                title={marker.religion}
+                                key={marker._id + "id"}
+                                title={marker._id}
                                 name={marker.religion}
                                 position={{ lat: marker.latitude, lng: marker.longitude }}
                                 icon={{
                                     url: marker.image,
                                     scaledSize: new google.maps.Size(40, 40)
-                                }} />
+                                }}
+                                onClick={this.onBulletinClick}
+                                 />
                         ))}
 
                     </Map>
