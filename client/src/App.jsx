@@ -1,28 +1,34 @@
 import React, { Component } from 'react';
-import {
-  BrowserRouter as Router, 
-  Route, 
-  Link,
-  Redirect,
-  withRouter
-} from "react-router-dom";
+import { instanceOf} from 'prop-types';
+import { withCookies, Cookies} from 'react-cookie';
 import './App.css';
 import Login from './components/Auth/Login';
 import MapContainer from './components/Map/MapContainer';
 import Wrapper from './components/Wrapper';
 import Signup from './components/Auth/Signup';
 
+
 class App extends Component {
-  constructor() {
-    super();
+
+  static propTypes = {
+    cookies: instanceOf(Cookies).isRequired
+  };
+
+  constructor(props) {
+    super(props);
+
+    const { cookies } = props;
     this.state = {
       newUser: false,
-      loggedInUser: null
+      loggedInUser: null,
+      session: cookies.get("id")
     };
 
     this.onLoggedIn = this.onLoggedIn.bind(this);
     this.signUpClick = this.signUpClick.bind(this);
     this.onSignUp = this.onSignUp.bind(this);
+    this.setCookie = this.setCookie.bind(this);
+    this.signOut = this.signOut.bind(this);
   }
 
   signUpClick(){
@@ -35,20 +41,40 @@ class App extends Component {
     this.setState({
       loggedInUser: user,
     });
+    this.setCookie(user._id);
   };
 
   onSignUp(user){
     this.setState({
       loggedInUser: user
     });
+    this.setCookie(user._id);
   };
+
+  setCookie(user){
+    const { cookies } = this.props;
+    cookies.set("id", user, { path: "/" });
+    console.log(cookies.get("id"));
+  };
+
+  signOut(){
+    console.log("sign out clicked", this.state.session);
+    const { cookies } = this.props;
+    this.setState({
+      loggedInUser: '',
+      session: cookies.remove("id", { path: "/" })
+    })
+    };
+
  
   render() {
     return (
       <Wrapper>
         {
-          !!this.state.loggedInUser ? (
-            <MapContainer user={this.state.loggedInUser} />
+          !!this.state.loggedInUser || !!this.state.session ? (
+            <MapContainer 
+            user={this.state.loggedInUser}
+            signOut={this.signOut} />
           ) :
           this.state.newUser ? (
             <Signup
@@ -62,6 +88,7 @@ class App extends Component {
           )
         }
       </Wrapper>
+
     );
   }
 };
@@ -70,4 +97,4 @@ class App extends Component {
 // check for cookie when logged in -set week expiry time on cookie
 // with error messages 
 
-export default App;
+export default withCookies(App);

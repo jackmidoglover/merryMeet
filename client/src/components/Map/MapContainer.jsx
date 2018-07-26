@@ -69,6 +69,10 @@ export class MapContainer extends React.Component {
         });
     };
 
+    signOutClick = () => {
+        this.props.signOut();
+    }
+
     // centers google map, then makes api call for markers to populate map
     componentDidMount() {
         // center the map on user's current location
@@ -112,6 +116,11 @@ export class MapContainer extends React.Component {
                     show={this.state.show}
                     onHide={this.modalDisplay}
                     onClick={this.modalDisplay} />
+                <div className="row">
+                    <div className="col-md-2 offset-md-10">
+                        <button className="btn btn-secondary text-right" onClick={this.signOutClick}> Sign out </button>
+                    </div>
+                </div>
                 <div className="row">
                     <MarkerMaker
                         onMarkerAdd={this.onMarkerAdd}
