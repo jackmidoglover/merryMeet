@@ -26,6 +26,10 @@ export class CommentWindow extends React.Component {
         })
             .then(response => {
                 console.log(response);
+                this.setState({
+                    locationComments: [],
+                })
+                this.requestComments();
             });
     };
 
@@ -42,6 +46,24 @@ export class CommentWindow extends React.Component {
         console.log(this.state);
     };
 
+    requestComments= () => {
+        axios.get('/api/bulletinboard', {
+            params: {
+                bulletin: this.state.bulletinid
+            }
+        })
+            .then(response => {
+                let comments = response.data;
+                console.log(comments);
+                let updatedCommentArray = [...this.state.locationComments];
+                comments.forEach(comment => {
+                    updatedCommentArray.push(comment);
+                });
+
+                this.setState({ locationComments: updatedCommentArray });
+            });
+    }
+
 
     componentDidUpdate(prevProps, prevState, snapshot) {
         if (this.props.bulletinID !== prevProps.bulletinID) {
@@ -53,21 +75,8 @@ export class CommentWindow extends React.Component {
 
         if (this.state.bulletinid !== prevState.bulletinid) {
 
-            axios.get('/api/bulletinboard', {
-                params: {
-                    bulletin: this.state.bulletinid
-                }
-            })
-                .then(response => {
-                    let comments = response.data;
-                    console.log(comments);
-                    let updatedCommentArray = [...this.state.locationComments];
-                    comments.forEach(comment => {
-                        updatedCommentArray.push(comment);
-                    });
+            this.requestComments();
 
-                    this.setState({ locationComments: updatedCommentArray });
-                });
         };
     };
 
