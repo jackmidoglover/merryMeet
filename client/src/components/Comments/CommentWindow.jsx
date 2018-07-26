@@ -2,6 +2,7 @@ import React from 'react';
 import {Modal, Button} from 'react-bootstrap'
 import ReactDOM from 'react';
 import axios from 'axios';
+import CommentBox from './Comment.jsx';
 
 export class CommentWindow extends React.Component {
     state = {
@@ -12,11 +13,13 @@ export class CommentWindow extends React.Component {
 
     onSubmit = (event) => {
             event.preventDefault();
-            console.log(this.props.bulletinid);
+            console.log(this.props.user.username);
             let userid= this.props.user._id;
             let userImg = this.props.user.imageUrl;
+            let username = this.props.user.username;
             axios.post('/api/addComment', {
                 user: userid,
+                username: username,
                 userImage: userImg,
                 bulletin: this.state.bulletinid,
                 text: this.state.text
@@ -67,7 +70,6 @@ export class CommentWindow extends React.Component {
                 });
 
                 this.setState({locationComments: updatedCommentArray});
-                console.log("new state?", this.state);
             });
 
 
@@ -93,7 +95,17 @@ export class CommentWindow extends React.Component {
                 </Modal.Header>
                 <Modal.Body>
                     <div className="showComments"> 
-                    Comments shown here
+                    {this.state.locationComments.map(comment => {
+                        return (
+                            <CommentBox
+                            key = {comment._id}
+                            id = {comment._id + "id"}
+                            userImage = {comment.userImage}
+                            username = {comment.username}
+                            text = {comment.text}
+                            />
+                        )
+                    })}
                     </div>
                     <hr />
                     <form className="addComment text-center" onSubmit={this.onSubmit}>

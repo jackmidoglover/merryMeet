@@ -27,7 +27,6 @@ export default class Login extends Component{
             params: this.state
         })
         .then((res) => {
-            console.log("login request sent", res.data);
             if(res.data.success === true){
                 this.props.onLoggedIn(res.data.user);
             }

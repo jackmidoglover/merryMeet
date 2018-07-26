@@ -6,7 +6,7 @@ import {
 } from 'google-maps-react';
 import MarkerMaker from './MarkerAdd';
 import axios from 'axios';
-import CommentWindow from './CommentWindow.jsx';
+import CommentWindow from '../Comments/CommentWindow.jsx';
 import { Modal } from 'react-bootstrap';
 
 
@@ -68,12 +68,11 @@ export class MapContainer extends React.Component {
             show: !this.state.show
         });
     };
-    
+
     // centers google map, then makes api call for markers to populate map
     componentDidMount() {
         // center the map on user's current location
         if (navigator && navigator.geolocation) {
-            console.log("navigator exists");
             navigator.geolocation.getCurrentPosition((pos) => {
                 const coords = pos.coords;
                 this.setState({
