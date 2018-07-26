@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "heroku-postbuild": "cd client && npm i && yarn build",
-    "start": "",
+    "start": "node app.js",
     "dev": "concurrently \"node app.js\" \"cd client && yarn start \""
   },
   "dependencies": {
