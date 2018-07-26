@@ -51,17 +51,27 @@ export class CommentWindow extends React.Component {
 
             
         };
-        if (this.state !== prevState){
-            console.log("sending api request with", this.state);
+        if (this.state.bulletinid !== prevState.bulletinid){
+
             axios.get('/api/bulletinboard', {
                 params: {
                     bulletin: this.state.bulletinid
                     }
                 })
             .then(response => {
-                console.log(response.data);
+                let comments = response.data;
+                console.log(comments);
+                let updatedCommentArray = [...this.state.locationComments];
+                comments.forEach(comment =>{
+                    updatedCommentArray.push(comment);
+                });
+
+                this.setState({locationComments: updatedCommentArray});
+                console.log("new state?", this.state);
             });
-        }
+
+
+        };
 
     };
 
