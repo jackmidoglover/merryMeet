@@ -6,6 +6,8 @@ import {
 } from 'google-maps-react';
 import MarkerMaker from './MarkerAdd';
 import axios from 'axios';
+import CommentWindow from './CommentWindow.jsx';
+import { Modal } from 'react-bootstrap';
 
 
 
@@ -21,7 +23,11 @@ export class MapContainer extends React.Component {
             religion: ''
         },
         markers: [],
-        markerAdded: false
+        markerAdded: false,
+        show: false, 
+        bulletinID: '',
+        user: ''
+        
     };
 
     // saves image data for clicked marker to state for later api request
@@ -50,16 +56,22 @@ export class MapContainer extends React.Component {
     };
 
     // when a marker on the map is clicked, it pulls up the comment window
-    onBulletinClick(props, marker, e){
-        console.log(marker);
-        console.log(props);
-        console.log(e);
+    onBulletinClick = (props, marker, e) =>{
+        this.setState({
+            bulletinID: marker.title
+        });
+        this.modalDisplay();
     };
 
+    modalDisplay = () => {
+        this.setState({
+            show: !this.state.show
+        });
+    };
+    
     // centers google map, then makes api call for markers to populate map
     componentDidMount() {
         // center the map on user's current location
-        console.log("map center");
         if (navigator && navigator.geolocation) {
             console.log("navigator exists");
             navigator.geolocation.getCurrentPosition((pos) => {
@@ -95,13 +107,19 @@ export class MapContainer extends React.Component {
         const { google } = this.props;
         return (
             <div className="container-fluid">
+                <CommentWindow 
+                    {...this.state} 
+                    user={this.props.user} 
+                    show={this.state.show} 
+                    onHide={this.modalDisplay} 
+                    onClick={this.modalDisplay} />
                 <div className="row">
                     <MarkerMaker
                         onMarkerAdd={this.onMarkerAdd}
                         onMarkerClicked={this.onMarkerClicked}
                     />
                 </div>
-                <div className="row">
+                <div className="row" id='main'>
                     <Map
                         google={this.props.google}
                         style={style}

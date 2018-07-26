@@ -48,7 +48,7 @@ class App extends Component {
       <Wrapper>
         {
           !!this.state.loggedInUser ? (
-            <MapContainer />
+            <MapContainer user={this.state.loggedInUser} />
           ) :
           this.state.newUser ? (
             <Signup
