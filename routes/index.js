@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const db = require('../models');
+const mongoose = require('mongoose');
 
 /* GET home page. */
 
@@ -31,9 +32,10 @@ router.get("/loadMarkers", (req, res, next) => {
 router.get("/bulletinboard", (req, res, next) => {
   let bulletinid = req.query.bulletin;
   console.log("bulletinboard route hit", bulletinid);
-  db.Comments.find({where: {bulletin: bulletinid}}, function(err, comments){
+  db.Comments.find({bulletin: bulletinid}, function(err, comments){
     if (err) console.log(err);
   }).then(comments => {
+    console.log(comments);
     res.status(200).json(comments);
   });
 });

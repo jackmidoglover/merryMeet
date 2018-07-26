@@ -32,25 +32,41 @@ export class CommentWindow extends React.Component {
         });
     };
 
-    componentWillReceiveProps(nextProps){
-        if (this.state.bulletinid !== nextProps.bulletinID){
+    onBulletinReceived = (id) => {
+        this.setState({
+            bulletinid: id
+        });
+        console.log(this.state);
+    };
+
+    componentDidUpdate(prevProps, prevState, snapshot){
+        if (this.props.bulletinID !== prevProps.bulletinID){
+            
             this.setState({
-                bulletinid: nextProps.bulletinID
+                bulletinid: this.props.bulletinID
             });
+
+            // this.onBulletinReceived(this.props.bulletinID);
+
+
+            
+        };
+        if (this.state !== prevState){
+            console.log("sending api request with", this.state);
             axios.get('/api/bulletinboard', {
                 params: {
-                    bulletin: this.state.bulletinID
+                    bulletin: this.state.bulletinid
                     }
                 })
             .then(response => {
-                console.log(response);
+                console.log(response.data);
             });
-        };
+        }
+
     };
 
   componentDidMount(){
-      console.log("grand child user object",this.props.user.username);
-      console.log("child bulletin id", this.props.bulletinid);
+      console.log("something", this.state);
 
   };
 
@@ -70,7 +86,7 @@ export class CommentWindow extends React.Component {
                     Comments shown here
                     </div>
                     <hr />
-                    <form className="addComment" onSubmit={this.onSubmit}>
+                    <form className="addComment text-center" onSubmit={this.onSubmit}>
                     <h4>Add a Comment</h4>
                     <hr />
                     <textarea className="form-control" defaultValue="add comment here" onChange={this.onCommentChange}/>
