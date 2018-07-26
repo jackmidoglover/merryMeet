@@ -1,5 +1,5 @@
-import React from 'react'; 
-import {Modal, Button} from 'react-bootstrap'
+import React from 'react';
+import { Modal, Button } from 'react-bootstrap'
 import ReactDOM from 'react';
 import axios from 'axios';
 import CommentBox from './Comment.jsx';
@@ -12,24 +12,24 @@ export class CommentWindow extends React.Component {
     }
 
     onSubmit = (event) => {
-            event.preventDefault();
-            console.log(this.props.user.username);
-            let userid= this.props.user._id;
-            let userImg = this.props.user.imageUrl;
-            let username = this.props.user.username;
-            axios.post('/api/addComment', {
-                user: userid,
-                username: username,
-                userImage: userImg,
-                bulletin: this.state.bulletinid,
-                text: this.state.text
-            })
+        event.preventDefault();
+        console.log(this.props.user.username);
+        let userid = this.props.user._id;
+        let userImg = this.props.user.imageUrl;
+        let username = this.props.user.username;
+        axios.post('/api/addComment', {
+            user: userid,
+            username: username,
+            userImage: userImg,
+            bulletin: this.state.bulletinid,
+            text: this.state.text
+        })
             .then(response => {
                 console.log(response);
             });
     };
 
-    onCommentChange =(event) => {
+    onCommentChange = (event) => {
         this.setState({
             text: event.target.value
         });
@@ -42,84 +42,78 @@ export class CommentWindow extends React.Component {
         console.log(this.state);
     };
 
-    componentDidUpdate(prevProps, prevState, snapshot){
-        if (this.props.bulletinID !== prevProps.bulletinID){
-            
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (this.props.bulletinID !== prevProps.bulletinID) {
+
             this.setState({
                 bulletinid: this.props.bulletinID
             });
-
-            // this.onBulletinReceived(this.props.bulletinID);
-
-
-            
         };
-        if (this.state.bulletinid !== prevState.bulletinid){
+
+        if (this.state.bulletinid !== prevState.bulletinid) {
 
             axios.get('/api/bulletinboard', {
                 params: {
                     bulletin: this.state.bulletinid
-                    }
-                })
-            .then(response => {
-                let comments = response.data;
-                console.log(comments);
-                let updatedCommentArray = [...this.state.locationComments];
-                comments.forEach(comment =>{
-                    updatedCommentArray.push(comment);
+                }
+            })
+                .then(response => {
+                    let comments = response.data;
+                    console.log(comments);
+                    let updatedCommentArray = [...this.state.locationComments];
+                    comments.forEach(comment => {
+                        updatedCommentArray.push(comment);
+                    });
+
+                    this.setState({ locationComments: updatedCommentArray });
                 });
-
-                this.setState({locationComments: updatedCommentArray});
-            });
-
-
         };
+    };
+
+    componentDidMount() {
+        console.log("something", this.state);
 
     };
 
-  componentDidMount(){
-      console.log("something", this.state);
-
-  };
-
-    render(){
-    return (
-        <div>
-            <Modal  
-                show={this.props.show}
-                onHide={this.props.onHide} 
-                onClick={this.props.onClick}
-            >
-                <Modal.Header>
-                    <h3> Comments </h3> 
-                </Modal.Header>
-                <Modal.Body>
-                    <div className="showComments"> 
-                    {this.state.locationComments.map(comment => {
-                        return (
-                            <CommentBox
-                            key = {comment._id}
-                            id = {comment._id + "id"}
-                            userImage = {comment.userImage}
-                            username = {comment.username}
-                            text = {comment.text}
-                            />
-                        )
-                    })}
-                    </div>
-                    <hr />
-                    <form className="addComment text-center" onSubmit={this.onSubmit}>
-                    <h4>Add a Comment</h4>
-                    <hr />
-                    <textarea className="form-control" defaultValue="add comment here" onChange={this.onCommentChange}/>
-                    <input type="submit" className="btn btn-primary" value="Submit" />
-                    </form>
-                </Modal.Body>
-                <Modal.Footer>
-                    <Button onClick={this.props.onClick}>Close</Button>
-                </Modal.Footer>
-            </Modal>
-        </div>
+    render() {
+        return (
+            <div>
+                <Modal
+                    show={this.props.show}
+                    onHide={this.props.onHide}
+                    onClick={this.props.onClick}
+                >
+                    <Modal.Header>
+                        <h3> Comments </h3>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <div className="showComments">
+                            {this.state.locationComments.map(comment => {
+                                return (
+                                    <CommentBox
+                                        key={comment._id}
+                                        id={comment._id + "id"}
+                                        userImage={comment.userImage}
+                                        username={comment.username}
+                                        text={comment.text}
+                                    />
+                                )
+                            })}
+                        </div>
+                        <hr />
+                        <form className="addComment text-center" onSubmit={this.onSubmit}>
+                            <h4>Add a Comment</h4>
+                            <hr />
+                            <textarea className="form-control" defaultValue="add comment here" onChange={this.onCommentChange} />
+                            <input type="submit" className="btn btn-primary" value="Submit" />
+                        </form>
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button onClick={this.props.onClick}>Close</Button>
+                    </Modal.Footer>
+                </Modal>
+            </div>
         );
     };
 };

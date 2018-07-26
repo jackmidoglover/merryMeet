@@ -24,10 +24,10 @@ export class MapContainer extends React.Component {
         },
         markers: [],
         markerAdded: false,
-        show: false, 
+        show: false,
         bulletinID: '',
         user: ''
-        
+
     };
 
     // saves image data for clicked marker to state for later api request
@@ -56,7 +56,7 @@ export class MapContainer extends React.Component {
     };
 
     // when a marker on the map is clicked, it pulls up the comment window
-    onBulletinClick = (props, marker, e) =>{
+    onBulletinClick = (props, marker, e) => {
         this.setState({
             bulletinID: marker.title
         });
@@ -106,11 +106,11 @@ export class MapContainer extends React.Component {
         const { google } = this.props;
         return (
             <div className="container-fluid">
-                <CommentWindow 
-                    {...this.state} 
-                    user={this.props.user} 
-                    show={this.state.show} 
-                    onHide={this.modalDisplay} 
+                <CommentWindow
+                    {...this.state}
+                    user={this.props.user}
+                    show={this.state.show}
+                    onHide={this.modalDisplay}
                     onClick={this.modalDisplay} />
                 <div className="row">
                     <MarkerMaker
@@ -137,7 +137,7 @@ export class MapContainer extends React.Component {
                                     scaledSize: new google.maps.Size(40, 40)
                                 }}
                                 onClick={this.onBulletinClick}
-                                 />
+                            />
                         ))}
 
                     </Map>

@@ -1,7 +1,7 @@
 import React from 'react';
 
 const CommentBox = props => {
-    return(
+    return (
         <div className="row">
             <div className="col-md-3 userInfo">
                 <div className="row">
