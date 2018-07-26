@@ -7,7 +7,6 @@ const mongoose = require('mongoose');
 
 router.post("/addMarker", (req, res, next) => {
   let markerObject = req.body.params;
-  console.log("route hit", markerObject);
   db.Bulletin.create({
     latitude: markerObject.currentLocation.lat,
     longitude: markerObject.currentLocation.lng,
@@ -21,7 +20,6 @@ router.post("/addMarker", (req, res, next) => {
 });
 
 router.get("/loadMarkers", (req, res, next) => {
-  console.log("load marker route hit");
   db.Bulletin.find({}, function (err, marker) {
     if (err) console.log(err);
   }).then(markers => {
@@ -32,20 +30,18 @@ router.get("/loadMarkers", (req, res, next) => {
 router.get("/bulletinboard", (req, res, next) => {
   let bulletinid = req.query.bulletin;
   console.log("bulletinboard route hit", bulletinid);
-  db.Comments.find({bulletin: bulletinid}, function(err, comments){
+  db.Comments.find({ bulletin: bulletinid }, function (err, comments) {
     if (err) console.log(err);
   }).then(comments => {
-    console.log(comments);
     res.status(200).json(comments);
   });
 });
 
 router.post("/addComment", (req, res, next) => {
-  console.log("add comment route hit", req.body);
   res.status(200);
   db.Comments.create(req.body);
-    res.status(200).json({message: "comment added!"});
-  });
+  res.status(200).json({ message: "comment added!" });
+});
 
 
 module.exports = router;

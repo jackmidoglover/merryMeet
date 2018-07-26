@@ -6,7 +6,6 @@ const db = require('../models');
 /* GET users listing. */
 router.get('/login', function(req, res, next) {
   db.User.findOne({username: req.query.username}, function(err, user){
-    console.log("User", user);
     if (err || !user) {
       res
       .status(401)
@@ -26,7 +25,6 @@ router.get('/login', function(req, res, next) {
 });
 
 router.post("/signup", function(req, res, next){
-  console.log("sign up hit");
   db.User.findOne({ where : {username: req.username}}).then((err, response) => {
     console.log(response);
     if(err) {
@@ -38,9 +36,7 @@ router.post("/signup", function(req, res, next){
     }
 
   });
-    // db.User.insertOne()
-
-})
+});
 
 module.exports = router;
 
