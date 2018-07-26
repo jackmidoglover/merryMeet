@@ -3,8 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
+    "heroku-postbuild": "cd client && npm i && yarn build",
     "start": "",
-    "dev": "concurrently \"nodemon app.js\" \"cd client && yarn start \""
+    "dev": "concurrently \"node app.js\" \"cd client && yarn start \""
   },
   "dependencies": {
     "bcrypt": "^3.0.0",

@@ -33,9 +33,9 @@ app.use(function(req, res, next) {
 app.use('/api', indexRouter);
 app.use('/api/users', usersRouter);
 
-// app.get('*', (req,res) => {
-//   res.sendFile(path.join(__dirname + 'public/index.html'));
-// })
+app.get('*', (req,res) => {
+  res.sendFile(path.join(__dirname + 'public/index.html'));
+})
 
 
 // catch 404 and forward to error handler
