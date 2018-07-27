@@ -42,6 +42,7 @@ class App extends Component {
       loggedInUser: user,
     });
     this.setCookie(user._id);
+    console.log("on log in", user)
   };
 
   onSignUp(user){
@@ -49,6 +50,7 @@ class App extends Component {
       loggedInUser: user
     });
     this.setCookie(user._id);
+    console.log("on sign up", user);
   };
 
   setCookie(user){
