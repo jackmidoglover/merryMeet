@@ -72,7 +72,8 @@ class App extends Component {
     return (
       <Wrapper 
         logIn={this.state.loggedInUser} 
-        signOut={this.signOut}>
+        signOut={this.signOut}
+        session={this.state.session}>
         {
           !!this.state.loggedInUser || !!this.state.session ? (
             <MapContainer 

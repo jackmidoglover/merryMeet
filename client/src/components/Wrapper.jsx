@@ -6,7 +6,10 @@ const Wrapper = props => {
     return (
         <div className="container-fluid">
                 <header className="header text-center">
-                    <Navbar logIn={props.logIn} /> 
+                    <Navbar 
+                        logIn={props.logIn}
+                        signOut={props.signOut}
+                        session= {props.session} /> 
                     <h1 className="logo mt-5"> Merry Meet </h1> 
                 </header>
                 {props.children}

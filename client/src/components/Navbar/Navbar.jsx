@@ -1,10 +1,25 @@
 import React from 'react';
 import './navbar.css';
 
-const Navbar = props => {
-    const signOutClick = () => {
+export class Navbar extends React.Component {
+
+    state = {
+        session: this.props.session,
+        loggedInUser: this.props.logIn, 
+    }
+    componentWillReceiveProps(nextProps){
+        // if (this.props.logIn !== nextProps.logIn && this.props.session !== nextProps.session){
+        this.setState({
+            session: nextProps.session,
+            loggedInUser: nextProps.logIn
+        })
+    // }
+    }
+    signOutClick = () => {
+        console.log("Navbar state", this.state);
         this.props.signOut();
     }
+    render(){
         return (
             <nav className="navbar navbar-expand-lg">
                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -13,13 +28,14 @@ const Navbar = props => {
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul className="nav justify-content-end">
                         <li className="nav-item">
-                            {!!props.logIn ? (<a className="nav-link authButtons" href="#">Sign Out</a>)
+                            {!!this.state.loggedInUser || !!this.state.session ? (<a className="nav-link authButtons" href="#" onClick={this.signOutClick}>Sign Out</a>)
                             : (<a className="nav-link authButtons" href="#">Sign In</a>)}
                         </li>
                     </ul>
                 </div>
             </nav>
         )
+}
 }
 
 export default Navbar;

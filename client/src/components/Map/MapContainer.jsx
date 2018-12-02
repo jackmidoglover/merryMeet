@@ -117,7 +117,7 @@ export class MapContainer extends React.Component {
                     onClick={this.modalDisplay} />
                 <div className="row">
                     <div className="col-md-2 offset-md-10">
-                        <button className="btn btn-secondary text-right" onClick={this.signOutClick}> Sign out </button>
+                        <button className="btn btn-secondary text-right"> Sign out </button>
                     </div>
                 </div>
                 <div className="row">
