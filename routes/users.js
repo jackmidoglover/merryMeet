@@ -17,7 +17,7 @@ router.get('/login', function(req, res, next) {
         res.json({message:"Error signing in", err})
       } else {  
         console.log("passwords match", user);
-        res.status(201).send({success: isMatch, user});
+        res.status(201).send({success: true, user});
       }
       
     }));
@@ -25,6 +25,7 @@ router.get('/login', function(req, res, next) {
 });
 
 router.post("/signup", function(req, res, next){
+  console.log("request object" + JSON.parse(req));
   db.User.findOne({ where : {username: req.username}}).then((err, response) => {
     console.log(response);
     if(err) {
@@ -32,7 +33,8 @@ router.post("/signup", function(req, res, next){
     }
     else {
       db.User.create(req.body);
-      res.json({message: "User added!"});
+      // .catch(function(err){console.log(err)});
+      res.json({success: true, message: "User added!"});
     }
 
   });

@@ -27,7 +27,9 @@ export default class Login extends Component{
             params: this.state
         })
         .then((res) => {
+            console.log(res);
             if(res.data.success === true){
+                console.log("response", res);
                 this.props.onLoggedIn(res.data.user);
             }
             
@@ -54,22 +56,28 @@ export default class Login extends Component{
         return(
             <Authcard title="Log In">
                 <form className="col-md-10 offset-md-1 login-input" onSubmit={this.onSubmit}>
-                    <div className="row">
-                        <input type="text" name="username" placeholder="username" className="form-control" onChange={this.onUsernameChange} />
+                    <div className="row mb-2">
+                        <label htmlFor="username" className="col-md-4 text-right">Username: </label>
+                        <div className="col-md-8">
+                            <input type="text" name="username" placeholder="Enter username" className="form-control" onChange={this.onUsernameChange} />
+                        </div>
                     </div>
                     <div className="row">
                     </div>
-                    <div className="row">
-                        <input type="text" name="password" placeholder="password" className="form-control" onChange={this.onPasswordChange} />
+                    <div className="row mb-3">
+                        <label htmlFor="password" className="col-md-4 text-right">Password: </label>
+                        <div className="col-md-8">
+                            <input type="text" name="password" placeholder="Enter password" className="form-control" onChange={this.onPasswordChange} />
+                        </div>
                     </div> 
                     <div className="row">
-                        <div className="col-md-12 text-center">
+                        <div className="col-md-12 text-center mb-1">
                             <input type="submit" className="btn btn-primary" value="Submit" /> 
                         </div>
                     </div>
                     <div className="row">
-                        <div className="col-md-12 text-center">
-                            <button className="btn btn-secondary" onClick={this.onNewUserClick}>New User? </button> 
+                        <div className="col-md-12 text-center mb-2">
+                            Don't have an account? <a href="#" onClick={this.onNewUserClick}>Sign up!</a> 
                         </div>
                     </div>
                 </form>

@@ -24,13 +24,15 @@ export default class Login extends Component{
 
     onSubmit(event){
         event.preventDefault();
-        axios.post('/api/users/signup', {
+        // console.log(this.state);
+        axios('/api/users/signup', {
             params:this.state
         })
         .then(response => {
             console.log("sign up request sent", response);
             this.props.onSignUp(response.data);
-        });
+        })
+        // .catch(function(err){console.log(err)});
     };
 
     onUsernameChange(event){
