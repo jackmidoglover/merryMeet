@@ -26,6 +26,7 @@ class App extends Component {
     this.onLoggedIn = this.onLoggedIn.bind(this);
     this.signUpClick = this.signUpClick.bind(this);
     this.onSignUp = this.onSignUp.bind(this);
+    this.signInClick = this.signInClick.bind(this);
     this.setCookie = this.setCookie.bind(this);
     this.signOut = this.signOut.bind(this);
   }
@@ -33,6 +34,12 @@ class App extends Component {
   signUpClick(){
     this.setState({
       newUser: true
+    });
+  };
+
+  signInClick(){
+    this.setState({
+      newUser: false
     });
   };
 
@@ -83,6 +90,7 @@ class App extends Component {
           this.state.newUser ? (
             <Signup
              onSignUp={this.onSignUp}
+             signInClick={this.signInClick}
             />
           ) : (
             <Login
