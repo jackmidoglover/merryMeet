@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
 import Authcard from './Authcard';
 import axios from 'axios';
-
+const config = {
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded',
+      'Accept': 'application/json'
+    }
+  };
 
 export default class Login extends Component{
     constructor(props){
@@ -22,15 +27,15 @@ export default class Login extends Component{
         this.onBioChange = this.onBioChange.bind(this);
     };
 
-    onSubmit(event){
+    onSubmit = (event) => {
         event.preventDefault();
-        // console.log(this.state);
-        axios('/api/users/signup', {
-            params:this.state
-        })
+        console.log(this.state);
+        let user = this.state;
+        axios.post('/api/users/signup'
+        , {user})
         .then(response => {
             console.log("sign up request sent", response);
-            this.props.onSignUp(response.data);
+            this.props.onSignUp(response.data.user);
         })
         // .catch(function(err){console.log(err)});
     };

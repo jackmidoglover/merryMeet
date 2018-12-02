@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const db = require('../models');
+require("util").inspect.defaultOptions.depth = null;
 
 
 /* GET users listing. */
@@ -24,17 +25,19 @@ router.get('/login', function(req, res, next) {
   });
 });
 
-router.post("/signup", function(req, res, next){
-  console.log("request object" + JSON.parse(req));
-  db.User.findOne({ where : {username: req.username}}).then((err, response) => {
+router.post("/signup", function(req, res){
+  console.log("Request body", req.body.user);
+  var user = req.body.user;
+  db.User.findOne({ where : {username: user.username}}).then((err, response) => {
     console.log(response);
     if(err) {
     res.json({success: false, message: "Sorry, there was an issue registering you."});
     }
     else {
-      db.User.create(req.body);
+      db.User.create(user).then(function(user){
+        res.json({success: true, user});
+      })
       // .catch(function(err){console.log(err)});
-      res.json({success: true, message: "User added!"});
     }
 
   });
