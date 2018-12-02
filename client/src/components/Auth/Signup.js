@@ -1,12 +1,6 @@
 import React, { Component } from 'react';
 import Authcard from './Authcard';
 import axios from 'axios';
-const config = {
-    headers: {
-      'Content-Type': 'application/x-www-form-urlencoded',
-      'Accept': 'application/json'
-    }
-  };
 
 export default class Login extends Component{
     constructor(props){

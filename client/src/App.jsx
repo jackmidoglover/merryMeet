@@ -7,7 +7,6 @@ import MapContainer from './components/Map/MapContainer';
 import Wrapper from './components/Wrapper';
 import Signup from './components/Auth/Signup';
 
-
 class App extends Component {
 
   static propTypes = {
@@ -71,16 +70,18 @@ class App extends Component {
  
   render() {
     return (
-      <Wrapper>
+      <Wrapper 
+        logIn={this.state.loggedInUser} 
+        signOut={this.signOut}>
         {
           !!this.state.loggedInUser || !!this.state.session ? (
             <MapContainer 
-            user={this.state.loggedInUser}
-            signOut={this.signOut} />
+              user={this.state.loggedInUser}
+              signOut={this.signOut} />
           ) :
           this.state.newUser ? (
             <Signup
-            onSignUp={this.onSignUp}
+             onSignUp={this.onSignUp}
             />
           ) : (
             <Login

@@ -1,6 +1,5 @@
 import React from 'react';
 import { Modal, Button } from 'react-bootstrap'
-import ReactDOM from 'react';
 import axios from 'axios';
 import CommentBox from './Comment.jsx';
 

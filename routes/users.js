@@ -1,7 +1,6 @@
 var express = require('express');
 var router = express.Router();
 const db = require('../models');
-require("util").inspect.defaultOptions.depth = null;
 
 
 /* GET users listing. */

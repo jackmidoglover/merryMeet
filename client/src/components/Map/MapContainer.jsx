@@ -7,7 +7,6 @@ import {
 import MarkerMaker from './MarkerAdd';
 import axios from 'axios';
 import CommentWindow from '../Comments/CommentWindow.jsx';
-import { Modal } from 'react-bootstrap';
 
 
 
