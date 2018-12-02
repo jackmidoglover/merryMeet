@@ -29,7 +29,7 @@ export class Navbar extends React.Component {
                     <ul className="nav justify-content-end">
                         <li className="nav-item">
                             {!!this.state.loggedInUser || !!this.state.session ? (<a className="nav-link authButtons" href="#" onClick={this.signOutClick}>Sign Out</a>)
-                            : (<a className="nav-link authButtons" href="#">Sign In</a>)}
+                            : null}
                         </li>
                     </ul>
                 </div>

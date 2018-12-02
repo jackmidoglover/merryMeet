@@ -116,11 +116,6 @@ export class MapContainer extends React.Component {
                     onHide={this.modalDisplay}
                     onClick={this.modalDisplay} />
                 <div className="row">
-                    <div className="col-md-2 offset-md-10">
-                        <button className="btn btn-secondary text-right"> Sign out </button>
-                    </div>
-                </div>
-                <div className="row">
                     <MarkerMaker
                         onMarkerAdd={this.onMarkerAdd}
                         onMarkerClicked={this.onMarkerClicked}
