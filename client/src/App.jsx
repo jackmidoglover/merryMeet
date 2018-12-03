@@ -76,6 +76,7 @@ class App extends Component {
     };
 
     componentDidMount(){
+      if(this.state.session){
       Axios.get('/api/users/' + this.state.session)
     .then((res) => {
       this.setState({
@@ -84,6 +85,7 @@ class App extends Component {
       console.log(this.state.loggedInUser, "Logged in User");
     });
     }
+  }
 
  
   render() {
