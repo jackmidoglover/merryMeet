@@ -76,9 +76,9 @@ class App extends Component {
     };
 
     componentDidMount(){
-      if(!!this.state.session && !!this.state.loggedInUser){
+      if(this.state.session){
       Axios.get('/api/users/' + this.state.session)
-    .then((res) => {
+      .then((res) => {
       this.setState({
         loggedInUser: res.data
       })
