@@ -45,15 +45,14 @@ router.post("/signup", function(req, res){
 router.get("/:userid", function(req, res){
   console.log("general user route hit: " + req.params.userid);
 
-  db.User.findById(req.params.userid).then((err,response)=> {
+  db.User.findById(req.params.userid, (err,response)=> {
     console.log("Database response:" + response);
-    if(err){
-      res.json(err);
-      console.log(err);
-    }
-    else {
-      res.json(response)
-    }
+    
+      if(err){
+        console.log(err);
+      }
+      res.json(response);
+
   });
 });
 
