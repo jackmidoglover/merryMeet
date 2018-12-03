@@ -42,5 +42,20 @@ router.post("/signup", function(req, res){
   });
 });
 
+router.get("/:userid", function(req, res){
+  console.log("general user route hit: " + req.params.userid);
+
+  db.User.findById(req.params.userid).then((err,response)=> {
+    console.log("Database response:" + response);
+    if(err){
+      res.json(err);
+      console.log(err);
+    }
+    else {
+      res.json(response)
+    }
+  });
+});
+
 module.exports = router;
 

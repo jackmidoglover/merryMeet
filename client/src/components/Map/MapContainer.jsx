@@ -9,7 +9,7 @@ import axios from 'axios';
 import CommentWindow from '../Comments/CommentWindow.jsx';
 import './mapContainer.css';
 import mapStyles from './mapstyles.js';
-import LoadingContainer from './MapInnerContainer';
+import UserWindow from './UserWindow';
 
 
 export class MapContainer extends React.Component {
@@ -106,6 +106,7 @@ export class MapContainer extends React.Component {
                     markers: updatedMarkersArray,
                 });
             });
+            console.log("current user" + this.state.user);
     };
 
 
@@ -120,6 +121,7 @@ export class MapContainer extends React.Component {
                             onHide={this.modalDisplay}
                             onClick={this.modalDisplay} />
                         <div className="row mt-5">
+                            <UserWindow user={this.props.user} />
                             <MarkerMaker
                                 onMarkerAdd={this.onMarkerAdd}
                                 onMarkerClicked={this.onMarkerClicked}
@@ -133,7 +135,6 @@ export class MapContainer extends React.Component {
                                 initialCenter={{ lat: 38.8597, lng: -104.9172 }}
                                 center={this.state.currentLocation}
                                 zoom={16}
-                                mapType="night"
                             >
                                 {this.state.markers.map(marker => (
                                     <Marker
@@ -159,14 +160,13 @@ export class MapContainer extends React.Component {
 
 export default GoogleApiWrapper({
     apiKey: 'AIzaSyBbydTLb3PaAjuuvOq-VbIZkrdHy_7ZYi0',
-    LoadingContainer: LoadingContainer
 })(MapContainer)
 
 
 const style = {
-    width: '82%',
+    width: '65%',
     height: '500%',
-    margin: 'auto',
+    marginLeft: 'auto',
     marginBottom: "20px",
     position: "relative",
     backgroundColor: "#311b92",

@@ -13,7 +13,7 @@ export class MarkerMaker extends React.Component{
 
     render(){
         return(
-            <div className="text-center mapContainer mt-2" style={{width: "82%", margin: "auto", padding: "10px"}}>
+            <div className="text-center mapContainer mt-2" style={{width: "65%", marginLeft: "auto", padding: "10px"}}>
                 <img src="/assets/images/celtic.png" className="marker" id="Celtic" onClick={this.onMarkerClick} />
                 <img src="/assets/images/egypt.png" className="marker" id="Egyptian" onClick={this.onMarkerClick} />
                 <img src="/assets/images/grecoRoman.png" id="Greco-Roman" className="marker" onClick={this.onMarkerClick} />

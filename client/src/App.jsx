@@ -6,6 +6,7 @@ import Login from './components/Auth/Login';
 import MapContainer from './components/Map/MapContainer';
 import Wrapper from './components/Wrapper';
 import Signup from './components/Auth/Signup';
+import Axios from 'axios';
 
 class App extends Component {
 
@@ -73,6 +74,16 @@ class App extends Component {
       session: cookies.remove("id", { path: "/" })
     })
     };
+
+    componentDidMount(){
+      Axios.get('/api/users/' + this.state.session)
+    .then((res) => {
+      this.setState({
+        loggedInUser: res.data
+      })
+      console.log(this.state.loggedInUser, "Logged in User");
+    });
+    }
 
  
   render() {
