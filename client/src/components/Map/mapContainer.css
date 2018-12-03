@@ -1,6 +1,5 @@
 .mapContainer{ 
-    background-color:#161D54;
-    /* border: solid 2px #283593; */
+    background-color:#A43640;
 };
 
 .marker {
@@ -36,9 +35,9 @@
     user-select: none;
     border: 1px solid transparent;
     border-radius: 4px;
-    background-color: #193D78;
+    background-color: #26273b;
     color: white;
-    border: 1px solid #14305E;
+    border: 1px solid #656687;
 }
 
 .addBtn:hover{

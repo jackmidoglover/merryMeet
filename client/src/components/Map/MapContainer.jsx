@@ -170,5 +170,5 @@ const style = {
     marginBottom: "20px",
     position: "relative",
     backgroundColor: "#311b92",
-    border: "10px solid #192261"
+    border: "10px solid #C24B3E"
 }
