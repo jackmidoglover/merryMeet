@@ -79,6 +79,7 @@ class App extends Component {
       if(this.state.session){
       Axios.get('/api/users/' + this.state.session)
       .then((res) => {
+      console.log(res);
       this.setState({
         loggedInUser: res.data
       })
