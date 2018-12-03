@@ -1,4 +1,5 @@
 import React from 'react';
+import './mapContainer.css';
 
 export class MarkerMaker extends React.Component{
 
@@ -12,7 +13,7 @@ export class MarkerMaker extends React.Component{
 
     render(){
         return(
-            <div className="col-md-6 offset-md-3 text-center">
+            <div className="text-center mapContainer" style={{width: "82%", margin: "auto"}}>
                 <img src="/assets/images/celtic.png" className="Celtic" onClick={this.onMarkerClick} />
                 <img src="/assets/images/egypt.png" className="Egyptian" onClick={this.onMarkerClick} />
                 <img src="/assets/images/grecoRoman.png" className="Greco-Roman" onClick={this.onMarkerClick} />
