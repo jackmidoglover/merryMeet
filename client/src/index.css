@@ -5,6 +5,9 @@ body {
   /* background: black; */
   background-image: url("/assets/images/desertNight.jpeg");
   background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
   min-height: 100%;
 
 }

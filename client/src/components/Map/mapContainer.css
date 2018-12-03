@@ -1,3 +1,47 @@
-.mapContainer {
-    background-color: #A53310;
+.mapContainer{ 
+    background-color:#161D54;
+    /* border: solid 2px #283593; */
+};
+
+.marker {
+    margin-top: 10px;
+}
+
+.marker:hover {
+    background-color: rgba(0,0,0,0.3);
+    border-radius: 40px;
+}
+
+.marker:active{
+    background-color: rgba(255,255,255,0.7);
+    border-radius: 40px;
+}
+
+.addBtn {
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    background-color: #193D78;
+    color: white;
+    border: 1px solid #14305E;
+}
+
+.addBtn:hover{
+    border: 1px solid transparent;
+    color: darkgray;
 }
