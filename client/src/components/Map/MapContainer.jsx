@@ -12,6 +12,7 @@ import mapStyles from './mapstyles.js';
 import UserWindow from './UserWindow';
 
 
+
 export class MapContainer extends React.Component {
 
     
@@ -107,6 +108,8 @@ export class MapContainer extends React.Component {
                 });
             });
             console.log("current user" + this.state.user);
+
+            
     };
 
 
@@ -159,7 +162,7 @@ export class MapContainer extends React.Component {
 }
 
 export default GoogleApiWrapper({
-    apiKey: 'AIzaSyBbydTLb3PaAjuuvOq-VbIZkrdHy_7ZYi0',
+    apiKey: process.env.REACT_APP_GOOGLE_KEY,
 })(MapContainer)
 
 

@@ -4,6 +4,7 @@ import './index.css';
 import App from './App.jsx';
 import registerServiceWorker from './registerServiceWorker';
 import { CookiesProvider } from 'react-cookie';
+require("dotenv").config(); 
 
 ReactDOM.render(
 <CookiesProvider>

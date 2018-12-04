@@ -12,6 +12,7 @@ var app = express();
 const mongoose = require("mongoose");
 const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/merryMeet";
 const db = require("./models");
+require("dotenv").config(); 
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
