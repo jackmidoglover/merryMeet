@@ -1,6 +1,12 @@
 import React from 'react';
+import Axios from 'axios';
 
 export class PictureUpload extends React.Component {
+    constructor(props){
+        super(props);
+        this.pictureUpload = this.pictureUpload.bind(this);
+        this.fileInput = React.createRef();
+    }
     state = {
         userFile: ''
     }
@@ -8,11 +14,26 @@ export class PictureUpload extends React.Component {
 
     }
 
+    pictureUpload = (event) => {
+        event.preventDefault();
+        console.log(this.fileInput.current.files[0]);
+        let image = this.fileInput.current.files[0];
+        let formData = new FormData();
+        formData.append("image", image);
+        Axios.post('/api/users/images', formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        }).then(res => {
+            console.log(res)
+        })
+    }
+
     render(){
         return (
             <div className="mt-5">
-                <form encType="multipart/form-data">
-                    <input type="file" name="avatar" className="form-control" />
+                <form encType="multipart/form-data" onSubmit={this.pictureUpload}>
+                    <input type="file" name="avatar" className="form-control" ref={this.fileInput} />
                     <input type="submit" />
                 </form>
             </div>

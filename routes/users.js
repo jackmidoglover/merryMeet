@@ -1,8 +1,30 @@
 var express = require('express');
 var router = express.Router();
 const db = require('../models');
+const multer = require("multer");
+const cloudinary = require("cloudinary");
+const cloudinaryStorage = require("multer-storage-cloudinary");
+require("dotenv").config();
 
+cloudinary.config({
+    cloud_name: process.env.CLOUD_NAME,
+    api_key: process.env.API_KEY,
+    api_secret: process.env.API_SECRET
+    });
+    
+    const storage = cloudinaryStorage({
+    cloudinary: cloudinary,
+    folder: "merryMeet",
+    allowedFormats: ["jpg", "png"],
+    transformation: [{ width: 500, height: 500, crop: "limit" }]
+    });
+  const parser = multer({ storage: storage });
 
+// POST user image to image db
+
+router.post('/images', parser.single('image'), (req, res) => {
+  console.log(req.file);
+})
 /* GET users listing. */
 router.get('/login', function(req, res, next) {
   db.User.findOne({username: req.query.username}, function(err, user){
