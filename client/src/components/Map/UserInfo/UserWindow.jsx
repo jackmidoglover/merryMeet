@@ -1,8 +1,10 @@
 import React from 'react';
+import PictureUpload from './PictureUpload';
 
 export class UserWindow extends React.Component {
     state ={
-        user: {}
+        user: {},
+        profileUpload: false,
     }
     componentDidMount(){
 
@@ -15,6 +17,12 @@ export class UserWindow extends React.Component {
         
     }
 
+    profileUploadClick = () => {
+        this.setState({
+            profileUpload: !this.state.profileUpload
+        })
+    }
+
     render(){
         return(
             <div className="col-md-4 mt-2" style={{backgroundColor: "#A43640", position: "absolute"}}>
@@ -25,6 +33,9 @@ export class UserWindow extends React.Component {
                 <p>Religion: {this.state.user.religion}</p>
                 <p>Zipcode: {this.state.user.zipcode}</p>
                 <p>Biography: {this.state.user.bio}</p>
+
+                <button className="btn btn-primary" onClick={this.profileUploadClick}>Add a Profile Picture!</button>
+                {this.state.profileUpload ? <PictureUpload /> : null}
             </div>
         )
     }

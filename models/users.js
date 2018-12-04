@@ -21,9 +21,6 @@ const UserSchema = new Schema({
     religion: {
         type: String
     }, 
-    imageUrl: {
-        type: String
-    }, 
     bio: {
         type: String,
         maxlength: 250
@@ -39,6 +36,10 @@ const UserSchema = new Schema({
     zipcode: {
         type: Number, 
         required: true
+    },
+    image: {
+        type: Schema.Types.ObjectId,
+        ref: "Images"
     }
 }); 
 

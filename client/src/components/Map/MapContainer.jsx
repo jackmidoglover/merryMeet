@@ -9,7 +9,7 @@ import axios from 'axios';
 import CommentWindow from '../Comments/CommentWindow.jsx';
 import './mapContainer.css';
 import mapStyles from './mapstyles.js';
-import UserWindow from './UserWindow';
+import UserWindow from './UserInfo/UserWindow';
 
 
 
