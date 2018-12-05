@@ -4,6 +4,7 @@ module.exports = {
     Events: require("./events"),
     Comments: require("./comments"),
     Bulletin: require("./bulletinboard"),
-    Markers: require("./mapMarker")
+    Markers: require("./mapMarker"),
+    Image: require('./images')
   };
   

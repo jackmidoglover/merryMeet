@@ -16,16 +16,16 @@ export class PictureUpload extends React.Component {
 
     pictureUpload = (event) => {
         event.preventDefault();
-        console.log(this.fileInput.current.files[0]);
         let image = this.fileInput.current.files[0];
         let formData = new FormData();
         formData.append("image", image);
-        Axios.post('/api/users/images', formData, {
+        Axios.post('/api/users/'+ this.props.userInfo._id + '/images', formData, {
             headers: {
                 'Content-Type': 'multipart/form-data'
             }
         }).then(res => {
             console.log(res)
+            this.props.picUpload();
         })
     }
 

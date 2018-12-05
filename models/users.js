@@ -39,7 +39,7 @@ const UserSchema = new Schema({
     },
     image: {
         type: Schema.Types.ObjectId,
-        ref: "Images"
+        ref: "Image"
     }
 }); 
 

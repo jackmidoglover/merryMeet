@@ -16,14 +16,32 @@ cloudinary.config({
     cloudinary: cloudinary,
     folder: "merryMeet",
     allowedFormats: ["jpg", "png"],
-    transformation: [{ width: 500, height: 500, crop: "limit" }]
+    transformation: [
+      { width: 200, height: 200, gravity: "face", radius: "max", crop: "thumb"},
+      {width:200, crop: "scale"}]
     });
   const parser = multer({ storage: storage });
 
 // POST user image to image db
 
-router.post('/images', parser.single('image'), (req, res) => {
+router.post('/:id/images', parser.single('image'), (req, res) => {
   console.log(req.file);
+  console.log(req.params.id);
+  const userId = req.params.id;
+  const image = {};
+  image.imageUrl = req.file.url;
+  image.imageId = req.file.public_id;
+
+  db.Image.create(image).then((imgData) => {
+    // console.log(imgData);
+    db.User.findByIdAndUpdate(userId, {$set: {image: imgData._id}}, function(err, doc){
+      if (err){
+        console.log(err)
+      }
+      res.json(doc);
+    })
+  })
+
 })
 /* GET users listing. */
 router.get('/login', function(req, res, next) {
@@ -38,7 +56,7 @@ router.get('/login', function(req, res, next) {
       if (err) {
         res.json({message:"Error signing in", err})
       } else {  
-        console.log("passwords match", user);
+        console.log("passwords match");
         res.status(201).send({success: true, user});
       }
       
@@ -73,8 +91,13 @@ router.get("/:userid", function(req, res){
       if(err){
         console.log(err);
       }
-      res.json(response);
+      return response;
 
+  }).populate("image").then(docs => {
+      console.log(docs);
+      return docs;
+  }).then((data) => {
+    res.json(data);
   });
 });
 

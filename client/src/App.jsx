@@ -30,6 +30,7 @@ class App extends Component {
     this.signInClick = this.signInClick.bind(this);
     this.setCookie = this.setCookie.bind(this);
     this.signOut = this.signOut.bind(this);
+    this.loadUserInfo = this.loadUserInfo.bind(this);
   }
 
   signUpClick(){
@@ -49,6 +50,7 @@ class App extends Component {
       loggedInUser: user,
     });
     this.setCookie(user._id);
+    this.loadUserInfo();
     console.log("on log in", user)
   };
 
@@ -75,17 +77,20 @@ class App extends Component {
     })
     };
 
-    componentDidMount(){
+    loadUserInfo(){
       if(this.state.session){
-      Axios.get('/api/users/' + this.state.session)
-      .then((res) => {
-      console.log(res);
-      this.setState({
-        loggedInUser: res.data
-      })
-      console.log(this.state.loggedInUser, "Logged in User");
-    });
+        Axios.get('/api/users/' + this.state.session)
+        .then((res) => {
+        console.log(res);
+        this.setState({
+          loggedInUser: res.data
+        })
+        console.log(this.state.loggedInUser, "Logged in User");
+      });
+      }
     }
+    componentDidMount(){
+      this.loadUserInfo();
   }
 
  
@@ -99,7 +104,8 @@ class App extends Component {
           !!this.state.loggedInUser || !!this.state.session ? (
             <MapContainer 
               user={this.state.loggedInUser}
-              signOut={this.signOut} />
+              signOut={this.signOut}
+              loadUser={this.loadUserInfo} />
           ) :
           this.state.newUser ? (
             <Signup
