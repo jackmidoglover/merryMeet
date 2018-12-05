@@ -57,10 +57,17 @@ router.get('/login', function(req, res, next) {
         res.json({message:"Error signing in", err})
       } else {  
         console.log("passwords match");
-        res.status(201).send({success: true, user});
+        // res.status(201).send({success: true, user});
+        return user;
       }
       
     }));
+  }).populate("image").then(docs => {
+    console.log(docs);
+    return docs
+  }).then(user => {
+    console.log("user data from login route", user);
+      res.status(201).send({success: true, user});
   });
 });
 
