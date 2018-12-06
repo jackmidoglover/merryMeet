@@ -40,10 +40,7 @@ export class UserWindow extends React.Component {
                     <p>Biography: {this.state.user.bio}</p>
                 </div>
                 <div className="col-md-6 text-right">
-                {this.state.user.image ? 
-                    <img src={this.state.user.image.imageUrl} className="img-circle userProfile" /> 
-                    : 
-                    <img src={this.state.defaultImage} className="img-circle userProfile" /> }
+                    <img src={this.props.user.image.imageUrl} className="img-circle userProfile" /> 
                 </div>
                 </div>
                 <button className="btn btn-primary" onClick={this.profileUploadClick}>Add a Profile Picture!</button>
