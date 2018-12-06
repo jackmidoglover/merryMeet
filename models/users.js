@@ -40,7 +40,6 @@ const UserSchema = new Schema({
     image: {
         type: Schema.Types.ObjectId,
         ref: "Image",
-        default: "5c087942ff5d302dfcf9855d"
     }
 }); 
 
