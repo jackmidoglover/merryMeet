@@ -15,7 +15,7 @@ export class UserWindow extends React.Component {
             this.setState({
                 user: nextProps.user
             })
-            this.props.loadInfo;
+            // this.props.loadInfo;
             console.log("UserWindow state", this.state.user.image);
         
     }
