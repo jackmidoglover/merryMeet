@@ -124,7 +124,10 @@ export class MapContainer extends React.Component {
                             onHide={this.modalDisplay}
                             onClick={this.modalDisplay} />
                         <div className="row mt-5">
+                        {this.props.user ? 
                             <UserWindow user={this.props.user} loadInfo={this.props.loadUser} />
+                            :
+                            null }
                             <MarkerMaker
                                 onMarkerAdd={this.onMarkerAdd}
                                 onMarkerClicked={this.onMarkerClicked}
