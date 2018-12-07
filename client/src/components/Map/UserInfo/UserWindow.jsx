@@ -15,7 +15,7 @@ export class UserWindow extends React.Component {
             this.setState({
                 user: nextProps.user
             })
-
+            this.props.loadInfo;
             console.log("UserWindow state", this.state.user.image);
         
     }
@@ -40,7 +40,10 @@ export class UserWindow extends React.Component {
                     <p>Biography: {this.state.user.bio}</p>
                 </div>
                 <div className="col-md-6 text-right">
-                    <img src={this.props.user.image.imageUrl} className="img-circle userProfile" /> 
+                {this.state.user.image ? 
+                <img src={this.props.user.image.imageUrl} className="img-circle userProfile" /> 
+                :
+                <img src={this.state.defaultImage} className="img-circle userProfile" /> }
                 </div>
                 </div>
                 <button className="btn btn-primary" onClick={this.profileUploadClick}>Add a Profile Picture!</button>
