@@ -6,7 +6,7 @@ export class UserWindow extends React.Component {
     state ={
         user: {},
         profileUpload: false,
-        defaultImage: "./assets/images/blaccatt.jpg"
+        defaultImage: "/assets/images/blaccatt.jpg"
     }
     componentDidMount(){
 
