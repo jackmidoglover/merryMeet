@@ -14,8 +14,14 @@ export class CommentWindow extends React.Component {
         event.preventDefault();
         console.log(this.props.user.username);
         let userid = this.props.user._id;
-        let userImg = this.props.user.imageUrl;
         let username = this.props.user.username;
+        let userImg;
+        if (this.props.user.image){
+            userImg = this.props.user.image.imageUrl;
+        }
+        else {
+            userImg = "/assets/images/blaccatt.jpg"
+        }
         axios.post('/api/addComment', {
             user: userid,
             username: username,
@@ -109,7 +115,6 @@ export class CommentWindow extends React.Component {
                                 )
                             })}
                         </div>
-                        <hr />
                         <form className="addComment text-center" onSubmit={this.onSubmit}>
                             <h4>Add a Comment</h4>
                             <hr />
