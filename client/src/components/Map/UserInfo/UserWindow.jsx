@@ -44,11 +44,11 @@ export class UserWindow extends React.Component {
                             <img src={this.props.user.image.imageUrl} className="img-circle userProfile" />
                             :
                             <img src={this.state.defaultImage} className="img-circle userProfile" />}
-                        <button className="btn btn-primary addPhoto" onClick={this.profileUploadClick}>Add a Profile Picture!</button>
+                        <button className="btn addPhoto" onClick={this.profileUploadClick}>Add a Profile Picture!</button>
                     </div>
                 </div>
-                <div className="row text-center">
-                        <div className="col-md-6 offset-md-3">
+                <div className="row text-center mb-3">
+                        <div className="col-md-6 offset-md-6">
                             {this.state.profileUpload ? <PictureUpload userInfo={this.state.user} picUpload={this.props.loadInfo} /> : null}
                         </div>
                 </div>

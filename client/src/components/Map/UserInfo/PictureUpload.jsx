@@ -34,8 +34,10 @@ export class PictureUpload extends React.Component {
         return (
             <div className="my-3 text-center addForm p-2">
                 <form encType="multipart/form-data" onSubmit={this.pictureUpload}>
+                <h4 className="mb-2">Choose a file below!</h4>
+                <hr />
                     <input type="file" name="avatar" className="form-control-file mx-4" ref={this.fileInput} />
-                    <input type="submit" className="btn submitPhoto" />
+                    <input type="submit" className="btn addPhoto" />
                 </form>
             </div>
         )

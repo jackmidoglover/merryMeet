@@ -16,19 +16,20 @@
         color: darkgray;
 }
 
-.addForm{
-    background-color: #01173b;
-    color: white;
-}
-
-.submitPhoto{
-    background-color: #A43640;
-    color: white; 
-    border: 1px solid #656687;
-}
-
-.submitPhoto:hover {
-    background-color: #A43640;
+.addPhoto:focus{
+    background-color: #656687;
     border: 1px solid transparent;
-    color: darkgray;   
+    color: darkgray;
+    box-shadow: transparent;
+}
+
+.addPhoto:active{
+    background-color: #656687;
+    border: 1px solid white;
+    color: darkgray;
+    box-shadow: transparent;
+}
+.addForm{
+    border: solid #01173b 1px;
+    border-radius: 5px;
 }
