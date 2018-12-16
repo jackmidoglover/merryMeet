@@ -24,7 +24,7 @@ export default class Login extends Component {
         this.onBioChange = this.onBioChange.bind(this);
     };
 
-    onSubmit = (event) => {
+    submitHandler = (event) => {
         event.preventDefault();
         let user = this.state;
         axios.post('/api/users/signup'
@@ -93,7 +93,7 @@ export default class Login extends Component {
     render() {
         return (
             <Authcard title="Sign Up">
-                <form className="col-md-10 offset-md-1 login-input" onSubmit={this.onSubmit}>
+                <form className="col-md-10 offset-md-1 login-input" onSubmit={this.submitHandler}>
                     <div className="row mb-2">
                         <label htmlFor="username" className="col-md-3 text-right">Username:</label>
                         <div className="col-md-9">
@@ -143,7 +143,7 @@ export default class Login extends Component {
                     </div>
                     <div className="row mb-2">
                         <div className="col-md-8 offset-md-2 text-center">
-                        Already have an account? <a href="#" onClick={this.signIn}>Sign in!</a>
+                        Already have an account? <button className="btn btn-info" onClick={this.signIn}>Sign in!</button>
                         </div>
                     </div>
                 </form>

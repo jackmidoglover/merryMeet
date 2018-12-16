@@ -77,7 +77,7 @@ export default class Login extends Component{
                     </div>
                     <div className="row">
                         <div className="col-md-12 text-center mb-2">
-                            Don't have an account? <a href="#" onClick={this.onNewUserClick}>Sign up!</a> 
+                            Don't have an account? <button className="btn btn-info" onClick={this.onNewUserClick}>Sign up!</button> 
                         </div>
                     </div>
                 </form>
