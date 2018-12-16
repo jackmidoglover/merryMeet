@@ -3,21 +3,21 @@ import PictureUpload from './PictureUpload';
 import './userwindow.css';
 
 export class UserWindow extends React.Component {
-    state ={
+    state = {
         user: {},
         profileUpload: false,
         defaultImage: "/assets/images/blaccatt.jpg"
     }
-    componentDidMount(){
+    componentDidMount() {
 
     }
-    componentWillReceiveProps(nextProps){
-            this.setState({
-                user: nextProps.user
-            })
-            // this.props.loadInfo;
-            console.log("UserWindow state", this.state.user.image);
-        
+    componentWillReceiveProps(nextProps) {
+        this.setState({
+            user: nextProps.user
+        })
+        // this.props.loadInfo;
+        console.log("UserWindow state", this.state.user.image);
+
     }
 
     profileUploadClick = () => {
@@ -26,28 +26,32 @@ export class UserWindow extends React.Component {
         })
     }
 
-    render(){
-        return(
-            <div className="col-md-4 mt-2" style={{backgroundColor: "#A43640", position: "absolute"}}>
+    render() {
+        return (
+            <div className="col-md-4 mt-2" style={{ backgroundColor: "#A43640", position: "absolute" }}>
                 <h1>Hello, {this.state.user.username}!</h1>
                 <hr />
-            <div className="row">
-                <div className="col-md-6">
-                    <h2>Your Profile: </h2>
-                    <p>Username: {this.state.user.username}</p>
-                    <p>Religion: {this.state.user.religion}</p>
-                    <p>Zipcode: {this.state.user.zipcode}</p>
-                    <p>Biography: {this.state.user.bio}</p>
+                <div className="row">
+                    <div className="col-md-6">
+                        <h2>Your Profile: </h2>
+                        <p><strong>Username:</strong> {this.state.user.username}</p>
+                        <p><strong>Religion:</strong> {this.state.user.religion}</p>
+                        <p><strong>Zipcode:</strong> {this.state.user.zipcode}</p>
+                        <p><strong>Biography:</strong> {this.state.user.bio}</p>
+                    </div>
+                    <div className="col-md-6 text-right">
+                        {this.state.user.image ?
+                            <img src={this.props.user.image.imageUrl} className="img-circle userProfile" />
+                            :
+                            <img src={this.state.defaultImage} className="img-circle userProfile" />}
+                        <button className="btn btn-primary addPhoto" onClick={this.profileUploadClick}>Add a Profile Picture!</button>
+                    </div>
                 </div>
-                <div className="col-md-6 text-right">
-                {this.state.user.image ? 
-                <img src={this.props.user.image.imageUrl} className="img-circle userProfile" /> 
-                :
-                <img src={this.state.defaultImage} className="img-circle userProfile" /> }
+                <div className="row text-center">
+                        <div className="col-md-6 offset-md-3">
+                            {this.state.profileUpload ? <PictureUpload userInfo={this.state.user} picUpload={this.props.loadInfo} /> : null}
+                        </div>
                 </div>
-                </div>
-                <button className="btn btn-primary" onClick={this.profileUploadClick}>Add a Profile Picture!</button>
-                {this.state.profileUpload ? <PictureUpload userInfo={this.state.user} picUpload={this.props.loadInfo} /> : null}
             </div>
         )
     }

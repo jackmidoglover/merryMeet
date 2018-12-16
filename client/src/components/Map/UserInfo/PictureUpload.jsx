@@ -1,5 +1,6 @@
 import React from 'react';
 import Axios from 'axios';
+import './userwindow.css';
 
 export class PictureUpload extends React.Component {
     constructor(props){
@@ -31,10 +32,10 @@ export class PictureUpload extends React.Component {
 
     render(){
         return (
-            <div className="mt-5">
+            <div className="my-3 text-center addForm p-2">
                 <form encType="multipart/form-data" onSubmit={this.pictureUpload}>
-                    <input type="file" name="avatar" className="form-control" ref={this.fileInput} />
-                    <input type="submit" />
+                    <input type="file" name="avatar" className="form-control-file mx-4" ref={this.fileInput} />
+                    <input type="submit" className="btn submitPhoto" />
                 </form>
             </div>
         )

@@ -2,3 +2,33 @@
     width: 150px;
     height: 150px;
 }
+
+.addPhoto {
+    background-color: #01173b;
+    color: #FFFFFF;
+    border: 1px solid #656687;
+    margin-left: auto;
+}
+
+.addPhoto:hover{
+        background-color: #01173b;
+        border: 1px solid transparent;
+        color: darkgray;
+}
+
+.addForm{
+    background-color: #01173b;
+    color: white;
+}
+
+.submitPhoto{
+    background-color: #A43640;
+    color: white; 
+    border: 1px solid #656687;
+}
+
+.submitPhoto:hover {
+    background-color: #A43640;
+    border: 1px solid transparent;
+    color: darkgray;   
+}
