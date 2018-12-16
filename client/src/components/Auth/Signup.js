@@ -11,6 +11,8 @@ export default class Login extends Component {
             religion: '',
             zipcode: '',
             bio: '',
+            signUpError: null,
+            signUpErrorMsg: null
         };
 
         this.onSubmit = this.onSubmit.bind(this);
@@ -24,15 +26,30 @@ export default class Login extends Component {
 
     onSubmit = (event) => {
         event.preventDefault();
-        console.log(this.state);
         let user = this.state;
         axios.post('/api/users/signup'
             , { user })
             .then(response => {
+                console.log("Response status", response.data);
                 console.log("sign up request sent", response);
                 this.props.onSignUp(response.data.user);
             })
-        // .catch(function(err){console.log(err)});
+        .catch(err => {
+            if (err.response){
+                console.log(err.response.data);
+                console.log(err.response.status);
+                console.log(err.response.headers)
+            }
+            if (err.response.status === 409) {
+                let errorType = err.response.data.type;
+                let errorMsg = err.response.data.message;
+                this.setState({
+                    signUpError: errorType,
+                    signUpErrorMsg: errorMsg
+                });
+                console.log(this.state.signUpError);
+            }
+        });
     };
 
     signIn(){
@@ -81,12 +98,26 @@ export default class Login extends Component {
                         <label htmlFor="username" className="col-md-3 text-right">Username:</label>
                         <div className="col-md-9">
                             <input type="text" name="username" placeholder="username" className="form-control" onChange={this.onUsernameChange} />
+                            {this.state.signUpError === "username" ? 
+                                <div class="alert alert-warning" role="alert">
+                                    {this.state.signUpErrorMsg}
+                                </div>
+                            :
+                                null
+                            }
                         </div>
                     </div>
                     <div className="row mb-2">
                         <label htmlFor="password" className="col-md-3 text-right">Password:</label>
                         <div className="col-md-9">
                             <input type="text" name="password" placeholder="password" className="form-control" onChange={this.onPasswordChange} />
+                            {this.state.signUpError === "password" ? 
+                                <div class="alert alert-danger" role="alert">
+                                    Your password must be atleast 6 characters long and no longer than 15 characters.
+                                </div>
+                            :
+                                null
+                            }
                         </div>
                     </div>
                     <div className="row mb-2">

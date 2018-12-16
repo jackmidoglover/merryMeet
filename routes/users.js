@@ -6,6 +6,8 @@ const cloudinary = require("cloudinary");
 const cloudinaryStorage = require("multer-storage-cloudinary");
 require("dotenv").config();
 
+// Cloudinary and Multer Configuration
+
 cloudinary.config({
     cloud_name: process.env.CLOUD_NAME,
     api_key: process.env.API_KEY,
@@ -43,7 +45,9 @@ router.post('/:id/images', parser.single('image'), (req, res) => {
   })
 
 })
-/* GET users listing. */
+
+
+/* GET users listing on login */
 router.get('/login', function(req, res, next) {
   db.User.findOne({username: req.query.username}, function(err, user){
     if (err || !user) {
@@ -71,13 +75,15 @@ router.get('/login', function(req, res, next) {
   });
 });
 
+// Post User Info on Signup
+
 router.post("/signup", function(req, res){
   console.log("Request body", req.body.user);
   var newUser = req.body.user;
   db.User.findOne({ where : {username: newUser.username}}).then((err, response) => {
     console.log(response);
     if(err) {
-    res.json({success: false, message: "Sorry, there was an issue registering you."});
+      throw("first error message", err);
     }
     else {
       db.User.create(newUser).then(function(userInfo){
@@ -90,11 +96,22 @@ router.post("/signup", function(req, res){
         })
         
       })
-      // .catch(function(err){console.log(err)});
+      .catch(function(err){
+        console.log("Catch error message", err);
+        if (err.code === 11000) {
+          res.status(409).json({success: false, type:"username", message: "Sorry, that username is already taken."});
+        }
+        else if (err.errors.password.kind === 'minlength'){
+          console.log("password length error")
+          res.status(409).json({success: false, type: "password", message: "Your password must be atleast six characters long!"});
+        }
+      });
     }
 
   });
 });
+
+// General User Route for information window
 
 router.get("/:userid", function(req, res){
   console.log("general user route hit: " + req.params.userid);
