@@ -15,7 +15,7 @@ export default class Login extends Component {
             signUpErrorMsg: null
         };
 
-        this.onSubmit = this.onSubmit.bind(this);
+        this.submitHandler = this.submitHandler.bind(this);
         this.signIn = this.signIn.bind(this);
         this.onUsernameChange = this.onUsernameChange.bind(this);
         this.onPasswordChange = this.onPasswordChange.bind(this);
