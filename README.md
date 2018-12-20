@@ -14,13 +14,13 @@ Merry Meet is still being debugged, but currently offers all basic features.
 
 ## Screenshots
 
-### Login Page on Entry
+#### Login Page on Entry
 ![Login Page](./readmeimages/signIn.png)
 
-### Sign Up Page for New Users
+#### Sign Up Page for New Users
 ![Signup Page](./readmeimages/signUp.png)
 
-### Home Page after Logged In
+#### Home Page after Logged In
 ![Home Page](./readmeimages/homePage.png)
 
 
@@ -36,14 +36,14 @@ Merry Meet is still being debugged, but currently offers all basic features.
 
 ## Features
 
-### User Profile Picture Upload
+#### User Profile Picture Upload
 ![Picture Upload](./readmeimages/fileUpload.png)
 
-### Add Marker to Location
+#### Add Marker to Location
 ![Add Marker](./readmeimages/addMarker.png)
 
-### Add Comment
+#### Add Comment
 ![Add Comment](./readmeimages/addComment1.png)
 
-### See other comments and reply
+#### See other comments and reply
 ![Add Comment 2](./readmeimages/addComment2.png)
